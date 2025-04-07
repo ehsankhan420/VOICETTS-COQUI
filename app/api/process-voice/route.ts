@@ -4,6 +4,8 @@ import path from 'path'
 import { v4 as uuidv4 } from 'uuid'
 import { existsSync } from 'fs'
 
+export const runtime = 'nodejs'; // Ensures this runs on Node.js runtime
+
 export async function POST(request: NextRequest) {
   try {
     const formData = await request.formData()
@@ -109,11 +111,10 @@ export async function POST(request: NextRequest) {
     const geminiData = await geminiResponse.json()
     
     // Extract text from Gemini response, clean up asterisks and excessive whitespace
-    // Extract text from Gemini response, clean up formatting
-let text = geminiData.candidates?.[0]?.content?.parts?.[0]?.text || 'No response generated'
+    let text = geminiData.candidates?.[0]?.content?.parts?.[0]?.text || 'No response generated'
 
-// Remove markdown-style asterisks and trim spaces
-text = text.replace(/\*\*/g, '').replace(/\*/g, '').trim();
+    // Remove markdown-style asterisks and trim spaces
+    text = text.replace(/\*\*/g, '').replace(/\*/g, '').trim();
 
     // Clean up: Delete the temporary file
     try {
@@ -131,10 +132,4 @@ text = text.replace(/\*\*/g, '').replace(/\*/g, '').trim();
       { status: 500 }
     )
   }
-}
-
-export const config = {
-  api: {
-    bodyParser: false,
-  },
 }
