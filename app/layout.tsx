@@ -2,7 +2,8 @@ import type React from "react"
 import type { Metadata } from "next"
 import { ThemeProvider } from "@/components/theme-provider"
 import { PageTransition } from "@/components/page-transition"
-import { AnimatedRouteIndicator } from "@/components/animated-route-indicator"
+import { RouteIndicatorWrapper } from "@/components/route-indicator-wrapper"
+
 import "./globals.css"
 import { Inter } from "next/font/google"
 
@@ -23,7 +24,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <AnimatedRouteIndicator />
+        <RouteIndicatorWrapper />
           <PageTransition>{children}</PageTransition>
           <div
             id="page-transition-overlay"
