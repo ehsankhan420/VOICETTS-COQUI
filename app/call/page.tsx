@@ -1,9 +1,9 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, Suspense } from "react"
 import { VoiceCall } from "@/components/voice-call"
 import { ArrowLeft, Phone, PhoneOff, Sparkles } from "lucide-react"
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { motion } from "framer-motion"
 import { toast } from "@/hooks/use-toast"
 import { Toaster } from "@/components/ui/toaster"
@@ -12,8 +12,10 @@ import { navigateTo } from "@/lib/navigation-helper"
 import Image from "next/image"
 import { ThemeToggle } from "@/components/theme-toggle"
 
-export default function CallPage() {
+// Wrapper component to handle search params with Suspense
+function CallPageContent() {
   const router = useRouter()
+  const searchParams = useSearchParams()
   const [isCallActive, setIsCallActive] = useState(false)
   const [callDuration, setCallDuration] = useState(0)
   const [isSupported, setIsSupported] = useState(true)
@@ -212,7 +214,6 @@ export default function CallPage() {
             {!isCallActive && (
               <div className="p-6">
                 <div className="flex items-center gap-2 mb-6">
-                  {/* <Sparkles className="h-5 w-5 text-blue-500 animate-pulse-custom" /> */}
                   <h1 className="text-xl font-semibold gradient-text leading-none">AI Voice Conversation</h1>
                 </div>
 
@@ -296,3 +297,11 @@ export default function CallPage() {
   )
 }
 
+// Main export with Suspense boundary
+export default function CallPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <CallPageContent />
+    </Suspense>
+  )
+}
