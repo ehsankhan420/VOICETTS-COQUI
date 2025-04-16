@@ -22,21 +22,6 @@ const SCRIPT_TYPES = [
     name: "TRUCK DISPATCH",
     description: "Fronting Only - Qualify leads and transfer to closers",
   },
-  {
-    id: "reliant_bpo",
-    name: "Reliant BPO",
-    description: "Fronting Only - Qualify leads and transfer to closers",
-  },
-  {
-    id: "21st_bpo",
-    name: "21st BPO",
-    description: "Fronting, Verification, and Closing - Qualify and close deals",
-  },
-  {
-    id: "sirus_solutions",
-    name: "Sirus Solutions",
-    description: "Fronting Demo Calls - Pitch to doctors and book appointments",
-  },
 ]
 
 export const VoiceCall = ({ onEndCall }: { onEndCall?: () => void }) => {
