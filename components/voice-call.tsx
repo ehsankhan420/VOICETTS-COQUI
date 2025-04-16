@@ -17,6 +17,11 @@ import { cn, formatTime } from "@/lib/utils"
 
 // Define script types and their descriptions
 const SCRIPT_TYPES = [
+    {
+    id: "truck_dispatch",
+    name: "TRUCK DISPATCH",
+    description: "Fronting Only - Qualify leads and transfer to closers",
+  },
   {
     id: "reliant_bpo",
     name: "Reliant BPO",
